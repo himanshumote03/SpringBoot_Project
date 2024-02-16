@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org"
+                xmlns:sec="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Working Hours Home Page</title>
+</head>
+<body>
+    <h2>Working Hours Home Page</h2>
+    <hr>
+
+    <p>
+        <!-- Display username and role -->
+        User: <span sec:authentication="principal.username"></span><br>
+        Role(s): <span sec:authentication="principal.authorities"></span>
+    </p>
+
+    <hr>
+
+    <!-- Add a link to a point to /leaders ... this is for managers -->
+    <div sec:authorize="hasRole('MANAGER')" >
+        <p>
+            <a th:href="@{/leaders}">Leadership Meeting</a>
+            (Only for Manager peeps)
+        </p>
+    </div>
+
+
+    <!-- Add a link to a point to /system ... this is for admin -->
+    <div sec:authorize="hasRole('ADMIN')" >
+        <p>
+            <a th:href="@{/systems}">IT Systems Meeting</a>
+            (Only for Admin peeps)
+        </p>
+    </div>
+    <hr>
+
+    <p>
+    Welcome to the "Working Hours" Home Page!
+    </p>
+    <!-- Add a logout button -->
+    <form action="#" th:action="@{/logout}" method="POST">
+        <input type="submit" value="Logout" />
+    </form>
+
+
+</body>
+</html>
